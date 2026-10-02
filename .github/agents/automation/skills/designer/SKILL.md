@@ -13,7 +13,7 @@ Find the pitch at the user-specified location, repository-root PITCH.md, or .pro
 
 Identify the primary journey, navigation destinations, important UI states, and recovery flows. Reuse existing view IDs, prompt/image pairs, and the user's directory convention. Inspect candidate reference images before selecting them. Existing images are design evidence, not proof of owner approval or functional behavior.
 
-Write or update one compact `.project/presentation/DESIGN.md` (or the established equivalent), containing:
+Adapt [the DESIGN.md template](../../templates/DESIGN.md), replacing placeholders and preserving existing project decisions. Write or update one compact `DESIGN.md` in the target project root (unless the user explicitly requests another location), containing:
 
 - Pitch path and relevant requirements, plus unresolved behavior affecting the proposed views.
 - Sitemap and primary flows; distinguish pages from filters, panels, and states.
@@ -39,7 +39,7 @@ When generating a new base, inspect it before proceeding. Respect an explicit hu
 Use this default artifact layout, preserving an existing equivalent layout when present:
 
 ```text
-.project/presentation/DESIGN.md
+DESIGN.md
 .project/models/<provider>/<model-folder>/
   <view-id>/
     <view-id>.md

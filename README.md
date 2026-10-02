@@ -2,7 +2,7 @@
 
 Reusable skills, agent templates, and model utilities for project development and visual production. Clone the collection into a project and use only the capabilities you need.
 
-> **Version 0.2.0-poc.1 — experimental, full pipeline unverified.** See [CHANGELOG.md](CHANGELOG.md) for the version convention, changes, and validation limits.
+> **Version 0.2.0-poc.2 — experimental, full pipeline unverified.** See [CHANGELOG.md](CHANGELOG.md) for the version convention, changes, and validation limits.
 
 ## Step 0. Clone the resources into your project
 
@@ -50,7 +50,7 @@ To restore the entire checkout, use `git -C .project/resources sparse-checkout d
 | --- | --- |
 | Turn an idea into a specification and development pipeline | Steps 1–5 below |
 | Prepare project-specific execution roles | [Agents skill](.github/agents/automation/skills/agents/SKILL.md) and its linked templates |
-| Design views and UX from a pitch | [Designer skill](.github/agents/designer/SKILL.md) |
+| Design views and UX from a pitch | [Designer skill](.github/agents/automation/skills/designer/SKILL.md) |
 | Generate images from reviewed prompt files | [Sunburst image guide](.github/models/openai/image-2-5-sunburst/README.md) |
 
 Model resources are optional and operate independently of pipeline preparation. Their links are unavailable in an agents-only checkout until you add `.github/models`. Model utilities and the designer skill are included from version 0.2.0-poc.1.
@@ -69,17 +69,19 @@ The image script defaults to a dry run and supports config defaults, per-prompt 
 
 ## Design a UI from the pitch
 
+See the [designer usage guide](.github/agents/automation/skills/designer/README.md) for planning-only, generation, and extension examples.
+
 The designer skill reads the pitch, maps the relevant views and flows, discovers a suitable skill under `.github/models`, and uses that skill to generate related images. It records base-image dependencies so new views can retain the same visual language.
 
 ```text
-Read <resources>/.github/agents/designer/SKILL.md.
+Read <resources>/.github/agents/automation/skills/designer/SKILL.md.
 Use <project>/PITCH.md to map the main views and UX. Generate one base view
 and two related views using an appropriate model skill in Resources.
 Reuse existing suitable images. Keep proposals distinct from fixed requirements,
 use fictional data, and save prompt/image pairs under <project>/.project/models.
 ```
 
-For planning only, say “produce the view map and prompts; do not generate images.” To extend an existing design, name the additional views or bound the number to generate. By default, the map is `.project/presentation/DESIGN.md`; each view has a named folder containing its prompt, image, and provenance. Native API records stay under the model's `.runs` folder. See the [designer skill](.github/agents/designer/SKILL.md) for review and resume behavior.
+For planning only, say “produce the view map and prompts; do not generate images.” To extend an existing design, name the additional views or bound the number to generate. By default, the map is `DESIGN.md` in the target project root; each view has a named folder containing its prompt, image, and provenance. Native API records stay under the model's `.runs` folder. See the [designer skill](.github/agents/automation/skills/designer/SKILL.md) for review and resume behavior.
 
 ## Step 1. Define your idea
 
@@ -266,7 +268,7 @@ the new feature yet.
 
 ## What to expect from this version
 
-The six skills and four templates are written and structurally validated. A full sample-project trial is still needed. These are instructions followed by an agent, not a standalone scheduler or background service.
+The seven automation skills and five document templates are written and structurally validated. A full sample-project trial is still needed. These are instructions followed by an agent, not a standalone scheduler or background service.
 
 Five reusable role templates are available: coordinator, implementation specialist, user experience reviewer, acceptance verifier, and test/build runner. Automatic dependency scheduling is not implemented. The agents skill can prepare project-specific role definitions for a supported runner; an unspecified runner leaves activation unresolved. Requesting kit preparation alone does not launch workers, provision services, or deploy a product.
 

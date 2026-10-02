@@ -12,6 +12,11 @@ Resources uses `MAJOR.MINOR.PATCH` with proof-of-concept prereleases named `MAJO
 
 Version applies to the resources bundle, not the applications it prepares. Project readiness is reported separately as **specified**, **configured**, or **verified**, tied to evidence. No stable release or 1.0 claim will be based on structural validation alone.
 
+## 0.2.0-poc.2 — 2026-10-02
+
+- Move designer into automation skills, add its usage README and shared DESIGN.md template, and update discovery links.
+- Place the designer view/UX map at repository-root `DESIGN.md` by default; generated image artifacts remain under `.project/models/`.
+
 ## 0.2.0-poc.1 — 2026-10-02
 
 **Status: proof of concept; full development pipeline unverified.** New visual-design and model-resource capabilities.
