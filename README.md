@@ -1,8 +1,12 @@
-> **Version 0.1.0-poc.2 — experimental, full pipeline unverified.** See [CHANGELOG.md](CHANGELOG.md) for the version convention, changes, and validation limits.
+# Resources
+
+Reusable skills, agent templates, and model utilities for project development and visual production. Clone the collection into a project and use only the capabilities you need.
+
+> **Version 0.2.0-poc.1 — experimental, full pipeline unverified.** See [CHANGELOG.md](CHANGELOG.md) for the version convention, changes, and validation limits.
 
 ## Step 0. Clone the resources into your project
 
-Once the resources repository has been published, run the following from your target project's root directory:
+For the full collection, run the following from your target project's root directory:
 
 ```sh
 mkdir -p .project
@@ -19,6 +23,63 @@ In the example requests below, replace:
 For example, the pitch skill will be located at `.project/resources/.github/agents/automation/skills/pitch/SKILL.md` inside your project. Make this directory readable to your coding agent; cloning the files does not automatically register skills with every agent runner.
 
 Keep this nested checkout separate from your project's tracked source by adding `/.project/resources/` to the target project's `.gitignore`. If you deliberately manage it as a Git submodule instead, use that workflow rather than ignoring it.
+
+### Download only agent resources
+
+For a fresh checkout, use Git sparse checkout to keep `.github/agents` (including its skills and templates) without checking out model utilities:
+
+```sh
+mkdir -p .project
+git clone --filter=blob:none --sparse https://github.com/Spumcake/Resources.git .project/resources
+git -C .project/resources sparse-checkout set .github/agents
+```
+
+Use this instead of the full clone command, not afterward at the same destination. Root files such as this README and CHANGELOG remain visible in cone mode. The clone is still a Git repository; filtering avoids fetching unneeded file contents when supported by the server. See [Git sparse checkout](https://git-scm.com/docs/git-sparse-checkout) and [clone options](https://git-scm.com/docs/git-clone).
+
+To add model resources later:
+
+```sh
+git -C .project/resources sparse-checkout add .github/models
+```
+
+To restore the entire checkout, use `git -C .project/resources sparse-checkout disable`. To update an unchanged checkout, use `git -C .project/resources pull --ff-only`; preserve any local edits first. These commands do not install agent definitions into VS Code automatically. Retaining the agents subtree together preserves relative links between skills and templates.
+
+## Choose a workflow
+
+| Need | Start here |
+| --- | --- |
+| Turn an idea into a specification and development pipeline | Steps 1–5 below |
+| Prepare project-specific execution roles | [Agents skill](.github/agents/automation/skills/agents/SKILL.md) and its linked templates |
+| Design views and UX from a pitch | [Designer skill](.github/agents/designer/SKILL.md) |
+| Generate images from reviewed prompt files | [Sunburst image guide](.github/models/openai/image-2-5-sunburst/README.md) |
+
+Model resources are optional and operate independently of pipeline preparation. Their links are unavailable in an agents-only checkout until you add `.github/models`. Model utilities and the designer skill are included from version 0.2.0-poc.1.
+
+For image generation, a request can be as simple as:
+
+```text
+Read <resources>/.github/models/openai/image-2-5-sunburst/SKILL.md.
+Generate one image from <project>/prompts/overview.md, using the project's
+image configuration and local OpenRouter environment file. Save the result
+under <project>/outputs. Use the prompt's aspect ratio and quality settings.
+Do not generate additional variations.
+```
+
+The image script defaults to a dry run and supports config defaults, per-prompt settings, command-line overrides, reference images, and resumable output records. Keep API keys out of source control. See its guide for setup and the exact commands.
+
+## Design a UI from the pitch
+
+The designer skill reads the pitch, maps the relevant views and flows, discovers a suitable skill under `.github/models`, and uses that skill to generate related images. It records base-image dependencies so new views can retain the same visual language.
+
+```text
+Read <resources>/.github/agents/designer/SKILL.md.
+Use <project>/PITCH.md to map the main views and UX. Generate one base view
+and two related views using an appropriate model skill in Resources.
+Reuse existing suitable images. Keep proposals distinct from fixed requirements,
+use fictional data, and save prompt/image pairs under <project>/.project/models.
+```
+
+For planning only, say “produce the view map and prompts; do not generate images.” To extend an existing design, name the additional views or bound the number to generate. By default, the map is `.project/presentation/DESIGN.md`; each view has a named folder containing its prompt, image, and provenance. Native API records stay under the model's `.runs` folder. See the [designer skill](.github/agents/designer/SKILL.md) for review and resume behavior.
 
 ## Step 1. Define your idea
 
@@ -172,7 +233,7 @@ Usually pipeline selects them. Invoke one directly for a narrow preparation task
 
 Other entry points: [pitch](.github/agents/automation/skills/pitch/SKILL.md), [pipeline](.github/agents/automation/skills/pipeline/SKILL.md), and [checking](.github/agents/automation/skills/checking/SKILL.md).
 
-## How to conintue from an interrupted session.
+## How to continue from an interrupted session
 
 Use the target's resume instructions, not pipeline generation:
 
@@ -207,6 +268,8 @@ the new feature yet.
 
 The six skills and four templates are written and structurally validated. A full sample-project trial is still needed. These are instructions followed by an agent, not a standalone scheduler or background service.
 
-Reusable default subagent templates and automatic dependency scheduling have not yet been implemented. The agents skill can prepare project-specific role definitions for a supported runner; an unspecified runner leaves activation unresolved. Requesting kit preparation alone does not launch workers, provision services, or deploy a product.
+Five reusable role templates are available: coordinator, implementation specialist, user experience reviewer, acceptance verifier, and test/build runner. Automatic dependency scheduling is not implemented. The agents skill can prepare project-specific role definitions for a supported runner; an unspecified runner leaves activation unresolved. Requesting kit preparation alone does not launch workers, provision services, or deploy a product.
 
 Start with one small project and carry one milestone through to a result you can inspect. That exercises the workflow without committing to a large autonomous run.
+
+The model utilities have local automated tests and a successful low-quality Sunburst generation/resume smoke test. Reference-image generation and the full image skill workflow remain unverified. Local unpublished changes are recorded under Unreleased in the changelog.

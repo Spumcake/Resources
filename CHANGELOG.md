@@ -12,6 +12,17 @@ Resources uses `MAJOR.MINOR.PATCH` with proof-of-concept prereleases named `MAJO
 
 Version applies to the resources bundle, not the applications it prepares. Project readiness is reported separately as **specified**, **configured**, or **verified**, tied to evidence. No stable release or 1.0 claim will be based on structural validation alone.
 
+## 0.2.0-poc.1 — 2026-10-02
+
+**Status: proof of concept; full development pipeline unverified.** New visual-design and model-resource capabilities.
+
+- Add a designer skill for pitch-driven view/UX maps, discovered model skills, base-image dependencies, named prompt/image pairs, provenance, and visual review.
+- Add OpenRouter Sunburst image-generation resources: skill, script, configuration example, local tests, and usage guide.
+- Resolve image settings from config defaults, per-prompt metadata, and CLI overrides; validate before submitting and include effective settings in resume identity.
+- Support explicit local environment-file loading, reference images, sequential request limits, and safe failure/resume records.
+- Broaden the main usage guide to cover model utilities and document agents-only sparse checkouts.
+- Validation: low-quality Sunburst generation and completed-request skipping exercised live; reference-image and full skill workflows remain unverified.
+
 ## 0.1.0-poc.2 — 2026-10-02
 
 **Status: proof of concept; full pipeline unverified.** Agent-template iteration of the initial release.
