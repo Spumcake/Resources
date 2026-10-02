@@ -21,7 +21,7 @@ Version applies to the resources bundle, not the applications it prepares. Proje
 - Resolve image settings from config defaults, per-prompt metadata, and CLI overrides; validate before submitting and include effective settings in resume identity.
 - Support explicit local environment-file loading, reference images, sequential request limits, and safe failure/resume records.
 - Broaden the main usage guide to cover model utilities and document agents-only sparse checkouts.
-- Validation: low-quality Sunburst generation and completed-request skipping exercised live; reference-image and full skill workflows remain unverified.
+- Validation: 12 local script tests pass; low-quality generation and resume exercised live. A supervised designer trial extended the workshop example with two medium-quality reference-based views, preserved named prompt/image pairs, and recorded provenance and visual review. Independent-agent evaluation and human approval remain pending.
 
 ## 0.1.0-poc.2 — 2026-10-02
 

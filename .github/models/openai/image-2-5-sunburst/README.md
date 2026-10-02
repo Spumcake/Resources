@@ -53,7 +53,7 @@ An exclusive output-directory lock prevents simultaneous writers. A hard crash m
 
 ## Validation status
 
-Proof of concept: local mocked tests cover completion/resume, uncertain failure blocking, and request limits. On 2026-10-02, after correcting the local credentials, a live low-quality 1:1 generation with `openai/gpt-image-2.5-sunburst` succeeded. The saved 1024×1024 PNG was visually inspected, usage reported $0.005985, and repeating the request skipped the completed output without another generation. Local tests cover environment-file loading, settings precedence, malformed metadata, request identity, and resume behavior. Reference-image editing, high-quality settings, and the full agent skill workflow remain unverified. Run local tests with:
+Proof of concept: local mocked tests cover completion/resume, uncertain failure blocking, and request limits. On 2026-10-02, after correcting the local credentials, a live low-quality 1:1 generation with `openai/gpt-image-2.5-sunburst` succeeded. The saved 1024×1024 PNG was visually inspected, usage reported $0.005985, and repeating the request skipped the completed output without another generation. Local tests cover environment-file loading, settings precedence, malformed metadata, request identity, and resume behavior. Two medium-quality 3:2 reference-based UI views were subsequently generated and visually inspected in the workshop example using the designer skill. High-quality settings and independent-agent skill evaluation remain unverified. Run local tests with:
 
 ```bash
 python3 -m unittest discover -s .project/resources/.github/models/openai/image-2-5-sunburst/scripts -p 'test_*.py'

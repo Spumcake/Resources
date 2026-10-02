@@ -272,4 +272,4 @@ Five reusable role templates are available: coordinator, implementation speciali
 
 Start with one small project and carry one milestone through to a result you can inspect. That exercises the workflow without committing to a large autonomous run.
 
-The model utilities have local automated tests and a successful low-quality Sunburst generation/resume smoke test. Reference-image generation and the full image skill workflow remain unverified. Local unpublished changes are recorded under Unreleased in the changelog.
+The model utilities have local automated tests and a successful low-quality Sunburst generation/resume smoke test. A supervised designer trial also generated and visually inspected two reference-based views from an existing example overview. Independent-agent skill evaluation and human design approval remain pending. Local unpublished changes are recorded under Unreleased in the changelog.
