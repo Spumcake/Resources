@@ -21,6 +21,18 @@ Define sequential dependencies before parallel assignments. Workers need relevan
 
 If standalone agent definitions are useful and supported, give each its purpose, inputs, ownership, allowed writes, deliverable, verification, and escalation conditions. Reference shared policy instead of copying it into every role. Verify runner syntax from local or authoritative documentation; if the runner is unknown, retain portable role descriptions in AGENTS.md and mark activation unresolved. Do not install a runner or change global configuration.
 
+## Adapt reusable role templates
+
+Start from the relevant portable templates; customize only the roles the project needs:
+
+- [Coordinator](../../templates/agents/coordinator.md): bounded assignments, dependency readiness, integration, and completion.
+- [Implementation specialist](../../templates/agents/implementation-specialist.md): adapt for each justified language/runtime or subsystem owner.
+- [User experience reviewer](../../templates/agents/user-experience-reviewer.md): observable journeys, presentation, accessibility, and human previews.
+- [Acceptance verifier](../../templates/agents/acceptance-verifier.md): independent criterion-by-criterion verification and relevant ownership/security review.
+- [Test and build runner](../../templates/agents/test-and-build-runner.md): reproducible checks, builds, and failure evidence.
+
+These are source templates, not installed agents or a mandatory five-agent ceremony. Replace placeholders, remove adaptation notes, reference shared project policy, and translate to the selected runner's supported format. Keep role definition separate from per-task checkout, revision, and resource assignments. Preserve all five templates when packaging this skill, but load only those being adapted. A description becomes configured only when the runner can load it, and verified only after an evidenced activation trial. The development coordinator does not replace the pipeline skill's preparation workflow.
+
 ## Project operating rules
 
 Fill the template with actual language conventions, relevant references, commands by reference to TASK, delegation availability, review requirements, and authorized scope. Replace placeholders and remove non-applicable rules. Do not import indefinite execution, paid-service limits, or technology choices from a different project.

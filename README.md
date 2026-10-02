@@ -1,4 +1,4 @@
-> **Version 0.1.0-poc.1 — experimental, full pipeline unverified.** See [CHANGELOG.md](CHANGELOG.md) for the version convention, changes, and validation limits.
+> **Version 0.1.0-poc.2 — experimental, full pipeline unverified.** See [CHANGELOG.md](CHANGELOG.md) for the version convention, changes, and validation limits.
 
 ## Step 0. Clone the resources into your project
 

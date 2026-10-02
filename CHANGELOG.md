@@ -12,6 +12,15 @@ Resources uses `MAJOR.MINOR.PATCH` with proof-of-concept prereleases named `MAJO
 
 Version applies to the resources bundle, not the applications it prepares. Project readiness is reported separately as **specified**, **configured**, or **verified**, tied to evidence. No stable release or 1.0 claim will be based on structural validation alone.
 
+## 0.1.0-poc.2 — 2026-10-02
+
+**Status: proof of concept; full pipeline unverified.** Agent-template iteration of the initial release.
+
+- Add five portable agent templates: coordinator, implementation specialist, user experience reviewer, acceptance verifier, and test/build runner.
+- Connect the agents skill to the templates for project-specific adaptation; define bounded assignments, ownership, evidence, and handoffs without requiring every role on every task.
+- Templates remain unactivated and behaviorally unverified; no runner configuration or example-project trial is included in this change.
+- Validation: agents skill structural validation, local template links, and whitespace checks pass.
+
 ## 0.1.0-poc.1 — 2026-10-02
 
 **Status: proof of concept; full pipeline unverified.** Initial publication for a subsequent example-project trial. No complete pitch-to-implementation run has been demonstrated.
