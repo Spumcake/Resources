@@ -12,6 +12,19 @@ Resources uses `MAJOR.MINOR.PATCH` with proof-of-concept prereleases named `MAJO
 
 Version applies to the resources bundle, not the applications it prepares. Project readiness is reported separately as **specified**, **configured**, or **verified**, tied to evidence. No stable release or 1.0 claim will be based on structural validation alone.
 
+## 0.3.0-poc.1 — 2026-10-03
+
+**Status: proof of concept; revised example-project trial pending.** Material workflow and installation change.
+
+- Replace role-like automation skills with six native VS Code agent definitions: Coordinator, Product Designer, Technical Planner, Task Operations, Code Review, and Verification.
+- Coordinator owns TASK.md and project AGENTS.md, discovers specialist roles, and stops unsupported requests instead of doing specialist work itself.
+- Retain focused PITCH, INTERFACE (formerly DESIGN), SYSTEMS (formerly ARCHITECTURE), and audit skills; add purposeful testing guidance. Templates accompany their roles or skills.
+- Move model utilities to `.github/skills/models/`; image mockup requests belong to Product Designer.
+- Import only `.github/`. Root AGENTS.md, README.md, and CHANGELOG.md are Resources development/usage files, not target-project instructions.
+- Replace rolling CHECKING.md with brief timestamped Coordinator project audits. Workers return evidence without automatic duplicate records; Resources maintenance does not trigger audits.
+- Migration: review obsolete `.github/agents/automation/` and `.github/models/` copies, merge the new payload, and reconcile existing DESIGN/ARCHITECTURE documents with their new names deliberately. Preserve unrelated project files and historical evidence.
+- Validation: role/skill structure and local references checked. Editor activation, routing, end-to-end project execution, and concurrent execution of this revised bundle remain unverified.
+
 ## 0.2.0-poc.2 — 2026-10-02
 
 - Move designer into automation skills, add its usage README and shared DESIGN.md template, and update discovery links.

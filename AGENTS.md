@@ -1,0 +1,58 @@
+# Working principles
+
+These instructions govern development of Resources. Import only `.github/` into consuming projects; do not copy this root file, README.md, or CHANGELOG.md. Coordinator templates generate project-specific instructions.
+
+Resources provides reusable agent definitions and capabilities for focused development. Its purpose is to keep one agent from having to understand and solve an entire project at once. Judge pipeline decisions by whether they reduce unnecessary context, coordination, and work while delivering the requested outcome.
+
+## Agents and skills
+
+- `.github/agents/` contains agent definitions and their supporting resources, including templates. Reusable skills belong under `.github/skills/`. A role defines responsibility, allowed actions, relevant context, expected output, and when to stop.
+- `.github/skills/` contains reusable capabilities that different agents can consult. A skill explains how to perform an operation; it does not create a worker or isolate context. Do not disguise a role as a skill.
+- The coordinator is the main conversation's role. It partitions work, invokes predefined workers, resolves dependencies, and combines results. It should not repeat every worker's investigation or implementation.
+- Before starting a project's multi-agent implementation, have the required roles defined, discoverable, and callable in the chosen environment. Confirm real delegation with a small bounded task. Role descriptions alone are not evidence that delegation works.
+- Before executing a coordinated request, match its required capabilities to suitable callable roles. If one is missing, stop and tell the user what role should be added; if a definition exists but cannot run, report that activation blocker. Do not perform partial work, write substitute documents/audits, or use a generic role to bypass the gap. Coordinator-owned TASK/AGENTS authorship remains direct work, but does not permit inventing missing specialist decisions.
+
+## Pipeline preparation
+
+Preparation remains a distinct phase. The coordinator discovers roles and their prerequisites rather than enforcing a fixed team or document sequence. Document-creation skills are reusable capabilities; roles own their use and review. Before dependent work, check only the documents needed for that assignment. Each selected role checks its own prerequisites. If a specialist document is missing or materially incomplete, its owning role uses the relevant skill within the authorized preparation scope rather than guessing or generating the entire kit automatically:
+
+- [Product Designer](.github/agents/product-designer.agent.md) owns PITCH via the [pitch skill](.github/skills/pipeline/pitch/SKILL.md): user intent and constraints; default `.project/documents/PITCH.md`.
+- [Product Designer](.github/agents/product-designer.agent.md) also owns root `INTERFACE.md` via the [interface skill](.github/skills/tasks/interface/SKILL.md), and discovers model skills to generate requested mockups. The Coordinator delegates this work rather than generating images itself.
+- [Technical Planner](.github/agents/technical-planner.agent.md) owns technical boundaries and `.project/documents/SYSTEMS.md` via the [systems skill](.github/skills/pipeline/systems/SKILL.md).
+- [Coordinator](.github/agents/coordinator.agent.md) directly creates and maintains TASK.md (roadmap, dependencies, acceptance, and assignments) and project AGENTS.md (working rules). These are role responsibilities, not creation skills. Templates live under `.github/agents/templates/coordinator/`.
+
+Honor existing canonical locations and explicit user paths. Do not maintain duplicate authorities. Writing a specification does not authorize implementation. Missing material intent requires a focused question or an explicit unknown, not an invented requirement.
+
+Automatic effort audits apply to the shipped Coordinator's work in a consuming project, not to maintenance of Resources itself. Do not create an audit for routine work on this repository unless explicitly requested. Existing local notes are under `../../documents/audits/` relative to this checkout (the outer Resources folder); do not recreate `.project/documents/` here or move those notes back. In target projects, the Coordinator consolidates worker evidence into `.project/documents/audits/` unless the project specifies another location. Workers and document skills do not independently generate automatic effort logs.
+
+## Execution roles
+
+- [Task Operations](.github/agents/task-operations.agent.md) implements bounded changes in an established stack; it is not an all-purpose fallback.
+- [Code Review](.github/agents/code-review.agent.md) reviews assigned code or document consistency and returns actionable findings without fixing them.
+- [Verification](.github/agents/verification.agent.md) runs proportionate acceptance checks, tests, builds, and available preview interactions without changing product code.
+
+Each role establishes its prerequisites. If a document it does not own is needed, it returns that need to the Coordinator for the owner. Do not demand every document for every small task. Workers report missing capabilities; they do not take over another role. Their tool access is not a filesystem sandbox.
+
+## Assignments and concurrency
+
+Give each worker a self-contained assignment: concrete outcome, relevant files and shared contracts, ownership and exclusions, observable acceptance criteria, required verification, and a stopping point. Use the smallest assignment that produces a useful result.
+
+Run independent assignments concurrently when supported. Establish shared contracts first and avoid concurrent edits to the same files. Dependent work waits for its prerequisite; reviewing a change requires that change to exist. Distinguish requested parallelism from observed overlapping execution.
+
+Workers return a concise result: changes or findings, verification actually performed, and any material blocker. The coordinator integrates these results without copying entire working histories into its context. Do not delegate trivial work just to keep every role busy.
+
+## Context and focus
+
+Read the assigned files and relevant instructions first. Search for specific unknowns and read targeted sections; do not load the entire repository, archive, roadmap, or every skill by default. Retrieve additional context only to answer a concrete question needed for the task.
+
+Keep product intent and the current acceptance criteria visible. Use existing patterns where appropriate. Do not invent requirements, frameworks, abstractions, documents, or review stages to make the task more comprehensive. Ask about a material ambiguity; resolve routine implementation choices within scope.
+
+An implementation request should produce a working increment, not an expanding plan. Investigate enough to make the next safe change. If progress stalls, identify the specific obstacle and narrow the assignment rather than repeating broad analysis.
+
+## Verification and stopping
+
+Roles whose responsibility includes writing, changing, or reviewing tests must consult [the testing skill](.github/skills/tasks/tests/SKILL.md). Future role definitions with those responsibilities must explicitly reference it. Load it when applicable, not into every conversation automatically.
+
+Specify verification proportional to the behavior and risk. Test count and coverage percentage are not goals by themselves. Preserve required checks; do not create new gates without a concrete need.
+
+Stop when the assigned outcome and agreed checks are satisfied. Repeat or broaden verification only for a relevant change, failure, or unresolved risk. Report actual execution separately from source inspection and human preview. Never invent a pass, an approval, or evidence of delegation.
